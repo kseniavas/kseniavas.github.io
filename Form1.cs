@@ -52,6 +52,9 @@ namespace WinFormsApp1
         {
             if (textBox1.TextLength!=0 && textBox2.TextLength != 0&&!float.IsInfinity(x))//проверка на заполненность полей
             {
+                if(e_>0){
+
+                
                 (float, int) sumCount = sumOfRow(x, e_);
                 sum = sumOfRow(x, e_).sumres;//вычисление суммы ряда
                 n = sumOfRow(x, e_).nres;
@@ -59,6 +62,14 @@ namespace WinFormsApp1
                 label4.Text = "Sin(x) = " + sinX;
                 label5.Text = "Сумма ряда " + sum;
                 label6.Text = "Количество членов ряда " + n;
+                
+                }
+                else{
+                    MessageBox.Show("Eps mеньше нуля!", "Ошибка", MessageBoxButtons.OK);
+                }
+            }
+            else{
+                MessageBox.Show("Некорректный формат", "Ошибка", MessageBoxButtons.OK);
             }
 
         }
@@ -102,7 +113,7 @@ namespace WinFormsApp1
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !(e.KeyChar == ',' ))//нельзя ввести отрицательное число, т.к. знак "-" не подразумевается
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && !(e.KeyChar == '-' && textBox2.TextLength == 0) && !(e.KeyChar == ',' ))
             {
                 e.Handled = true;
             }
